@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/System/SystemConfig/Schema/config.xsd">
+
+    <card>
+        <title>Basic Configuration</title>
+        <title lang="de-DE">Grundeinstellungen</title>
+
+        <input-field type="single-select">
+            <name>mode</name>
+            <required>true</required>
+            <label>Mode</label>
+            <label lang="de-DE">Modus</label>
+            <options>
+                <option>
+                    <id>public_sandbox</id>
+                    <name>Public Sandbox</name>
+                    <name lang="de-DE">Public Sandbox</name>
+                </option>
+                <option>
+                    <id>sandbox</id>
+                    <name>Sandbox</name>
+                    <name lang="de-DE">Sandbox</name>
+                </option>
+                <option>
+                    <id>prod</id>
+                    <name>Production</name>
+                    <name lang="de-DE">Produktion</name>
+                </option>
+            </options>
+            <defaultValue>public_sandbox</defaultValue>
+        </input-field>
+
+        <input-field type="checkbox">
+            <name>showTosCheckbox</name>
+            <label>Show TOS-Check</label>
+            <label lang="de-DE">AGB-Check anzeigen</label>
+            <defaultValue>true</defaultValue>
+        </input-field>
+    </card>
+
+    <card>
+        <title>API Settings (DE)</title>
+        <title lang="de-DE">API-Einstellungen (DE)</title>
+
+        <component name="sw-text-field">
+            <name>apiKeyDE</name>
+            <label>API key</label>
+            <label lang="de-DE">API key</label>
+        </component>
+
+        <component name="sw-text-field">
+            <name>merchantIdDE</name>
+            <label>Merchant ID</label>
+            <label lang="de-DE">Merchant ID</label>
+        </component>
+    </card>
+
+    <card>
+        <title>API Settings (AT)</title>
+        <title lang="de-DE">API-Einstellungen (AT)</title>
+
+        <component name="sw-text-field">
+            <name>apiKeyAT</name>
+            <label>API key</label>
+            <label lang="de-DE">API key</label>
+        </component>
+
+        <component name="sw-text-field">
+            <name>merchantIdAT</name>
+            <label>Merchant ID</label>
+            <label lang="de-DE">Merchant ID</label>
+        </component>
+    </card>
+
+    <card>
+        <title>API Settings (BE)</title>
+        <title lang="de-DE">API-Einstellungen (BE)</title>
+
+        <component name="sw-text-field">
+            <name>apiKeyBE</name>
+            <label>API key</label>
+            <label lang="de-DE">API key</label>
+        </component>
+
+        <component name="sw-text-field">
+            <name>merchantIdBE</name>
+            <label>Merchant ID</label>
+            <label lang="de-DE">Merchant ID</label>
+        </component>
+    </card>
+
+    <card>
+        <title>API Settings (NL)</title>
+        <title lang="de-DE">API-Einstellungen (NL)</title>
+
+        <component name="sw-text-field">
+            <name>apiKeyNL</name>
+            <label>API key</label>
+            <label lang="de-DE">API key</label>
+        </component>
+
+        <component name="sw-text-field">
+            <name>merchantIdNL</name>
+            <label>Merchant ID</label>
+            <label lang="de-DE">Merchant ID</label>
+        </component>
+    </card>
+</config>

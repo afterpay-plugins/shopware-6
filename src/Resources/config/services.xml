@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="Colo\AfterPay\Service\InvoicePayment">
+            <argument type="service" id="Shopware\Core\Checkout\Order\Aggregate\OrderTransaction\OrderTransactionStateHandler"/>
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="salutation.repository"/>
+            <argument type="service" id="product.repository"/>
+            <argument type="service" id="order.repository"/>
+            <argument type="service" id="currency.repository"/>
+            <argument type="service" id="Shopware\Core\Checkout\Cart\SalesChannel\CartService"/>
+            <argument type="service" id="translator"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <argument type="service" id="session"/>
+            <tag name="shopware.payment.method.sync" />
+        </service>
+
+        <service id="Colo\AfterPay\Checkout\CheckoutSubscriber">
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="Colo\AfterPay\Checkout\Order\Validation\OrderValidationFactoryDecorator"
+                 decorates="Shopware\Core\Checkout\Order\Validation\OrderValidationFactory"
+                 public="false">
+            <argument type="service" id="Colo\AfterPay\Checkout\Order\Validation\OrderValidationFactoryDecorator.inner"/>
+        </service>
+
+        <service id="Colo\AfterPay\Resources\snippet\de_DE\SnippetFile_de_DE" public="true">
+            <tag name="shopware.snippet.file"/>
+        </service>
+        <service id="Colo\AfterPay\Resources\snippet\en_GB\SnippetFile_en_GB" public="true">
+            <tag name="shopware.snippet.file"/>
+        </service>
+    </services>
+</container>

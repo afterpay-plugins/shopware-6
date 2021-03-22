@@ -1,0 +1,11 @@
+{% sw_extends '@Storefront/storefront/page/checkout/confirm/confirm-payment.html.twig' %}
+
+{% block page_checkout_confirm_payment_current_image %}
+    {% set afterPayData = page.extensions[constant('Colo\\AfterPay\\Checkout\\CheckoutSubscriber::AFTERPAY_DATA_EXTENSION_ID')] %}
+
+    {% if context.paymentMethod.media or not afterPayData.afterPayActive or not afterPayData.paymentLogo or context.paymentMethod.id == afterPayData.paymentMethodId %}
+        {{ parent() }}
+    {% else %}
+        <img src="data:image/svg+xml;base64,{{ afterPayData.paymentLogo|raw }}" class="payment-method-image" title="{{ afterPayData.paymentMethodName }}" alt="{{ afterPayData.paymentMethodName }}" />
+    {% endif %}
+{% endblock %}
