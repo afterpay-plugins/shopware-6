@@ -1,7 +1,7 @@
 {
   "name": "colo/afterpay",
   "description": "Offer secured open invoice, direct debit and installment as payment means for your eCommerce customers with AfterPay.",
-  "version": "v1.0.5",
+  "version": "v1.0.6",
   "type": "shopware-platform-plugin",
   "license": "proprietary",
   "authors": [
@@ -10,7 +10,7 @@
     }
   ],
   "require": {
-    "shopware/core": "*"
+    "shopware/core": "6.3.*"
   },
   "extra": {
     "shopware-plugin-class": "Colo\\AfterPay\\AfterPay",

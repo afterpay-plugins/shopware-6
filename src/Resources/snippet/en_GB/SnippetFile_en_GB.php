@@ -8,12 +8,12 @@ class SnippetFile_en_GB implements SnippetFileInterface
 {
     public function getName(): string
     {
-        return 'messages.en-GB';
+        return 'snippets.en-GB';
     }
 
     public function getPath(): string
     {
-        return __DIR__ . '/messages.en-GB.json';
+        return __DIR__ . '/snippets.en-GB.json';
     }
 
     public function getIso(): string

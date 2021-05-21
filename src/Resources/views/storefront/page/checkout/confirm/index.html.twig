@@ -3,7 +3,7 @@
 {% block page_checkout_confirm_tos_control %}
     {{ parent() }}
 
-    {% set afterPayData = page.extensions[constant('Colo\\AfterPay\\Checkout\\CheckoutSubscriber::AFTERPAY_DATA_EXTENSION_ID')] %}
+    {% set afterPayData = page.extensions[constant('Colo\\AfterPay\\Subscribers\\CheckoutSubscriber::AFTERPAY_DATA_EXTENSION_ID')] %}
 
     {% if afterPayData.afterPayActive and afterPayData.merchantId and afterPayData.tosCheckbox %}
         <div class="custom-control custom-checkbox">

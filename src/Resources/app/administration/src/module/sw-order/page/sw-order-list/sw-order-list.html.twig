@@ -1,0 +1,46 @@
+{% block sw_order_list_grid_columns_actions_view %}
+    {% parent %}
+
+    <sw-context-menu-item
+            v-if="capturable(item)"
+            class="afterpay-sw-order-list__order-capture-action"
+            @click="onCapture(item.id)"
+            variant="primary">
+        {{ $tc('afterpay.sw-order.list.contextMenuCapture') }}
+    </sw-context-menu-item>
+{% endblock %}
+
+{% block sw_order_list_delete_modal %}
+    {% parent %}
+
+    {% block afterpay_sw_order_list_capture_modal %}
+        <sw-modal class="afterpay-sw-order-list__capture_modal"
+                    v-if="showCaptureModal === item.id"
+                    @modal-close="onCloseCaptureModal"
+                    :title="$tc('global.default.warning')"
+                    variant="small">
+
+            <p class="afterpay-sw-order-list__confirm-capture-text">
+                {{ $tc('afterpay.sw-order.list.textCaptureConfirm', 0, { orderNumber: `${item.orderNumber}` }) }}
+            </p>
+
+            {% block afterpay_sw_order_list_capture_modal_footer %}
+                <template #modal-footer>
+                    {% block afterpay_sw_order_list_capture_modal_cancel %}
+                        <sw-button class="afterpay-sw-order-list__cancel_button"
+                                   @click="onCloseCaptureModal" size="small">
+                            {{ $tc('afterpay.sw-order.list.buttonCancel') }}
+                        </sw-button>
+                    {% endblock %}
+
+                    {% block afterpay_sw_order_list_capture_modal_confirm %}
+                        <sw-button-process class="afterpay-sw-order-list__capture_button"
+                            @click="onConfirmCapture(item)" variant="primary" size="small">
+                            {{ $tc('afterpay.sw-order.list.buttonCapture') }}
+                        </sw-button-process>
+                    {% endblock %}
+                </template>
+            {% endblock %}
+        </sw-modal>
+    {% endblock %}
+{% endblock %}
