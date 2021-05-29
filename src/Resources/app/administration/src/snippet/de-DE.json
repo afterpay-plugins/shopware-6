@@ -1,0 +1,14 @@
+{
+  "afterpay": {
+    "sw-order": {
+      "list": {
+        "contextMenuCapture": "Capture",
+        "textDeleteConfirm": "Do you really want to delete this order ({orderNumber})?",
+        "buttonCancel": "Cancel",
+        "buttonCapture": "Capture",
+        "messageCaptureSuccess": "The order ({orderNumber}) was successfully captured.",
+        "messageCaptureError": "The order ({orderNumber}) was not captured."
+      }
+    }
+  }
+}

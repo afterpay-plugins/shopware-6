@@ -1,0 +1,40 @@
+{
+  "afterpay": {
+    "messages": {
+      "AskConsumerToReEnterDataError": "Leider konnte die Rechnungs- oder Lieferadresse nicht verifiziert werden. Bitte &uuml;berprüfen Sie die Eingabe oder w&auml;hlen Sie eine andere Zahlungsart.",
+      "AskConsumerToConfirmError": "Die Rechnungsadresse wurde korrigiert. Bitte &uuml;berprüfen und best&auml;tigen Sie die korrigierte Adresse.",
+      "OfferSecurePaymentMethodsError": "Diese Zahlungsart steht f&uuml;r Ihre Bestellung momentan leider nicht zur Verf&uuml;gung. Bitte w&auml;hlen Sie eine andere Zahlungsart.",
+      "BankAccountNotValid": "Kontonummer ung&uuml;ltig.",
+      "InstallmentNotSelected": "Installment not selected",
+      "InstallmentNotValid": "Selected installment not valid"
+    },
+    "checkout": {
+      "confirmAfterPayTerms": "Ich habe die <a href=\"https://documents.myafterpay.com/consumer-terms-conditions/%coloAfterpayLanguageCode%/%coloAfterpayMerchantID%/%coloAfterpayMerchantPaymentMethod%\" title=\"Allgemeinen Geschäftsbedingungen\" target=\"_blank\">Allgemeinen Geschäftsbedingungen</a> und die <a href=\"https://documents.myafterpay.com/privacy-statement/%coloAfterpayLanguageCode%/%coloAfterpayMerchantID%\" title=\"Datenschutzerklärung\" target=\"_blank\">Datenschutzerklärung</a> von AfterPay gelesen und akzeptiere diese.",
+      "paymentFields": {
+        "directdebit": {
+          "iban": "IBAN*",
+          "bic": "BIC*",
+          "requiredInfo": "* hierbei handelt es sich um ein Pflichtfeld"
+        },
+        "installment": {
+          "iban": "IBAN*",
+          "bic": "BIC*",
+          "requiredInfo": "* hierbei handelt es sich um ein Pflichtfeld"
+        }
+      }
+    },
+    "installments": {
+      "texts": {
+        "month": "Month",
+        "in": "in",
+        "installments": "installments",
+        "uspline": "Same installments every month - no surprises",
+        "interestRate": "Fixed interest rate of <span class=\"interest-rate\">%coloAfterpayInstallmentInterestRate%%</span> p.a.",
+        "effectiveInterestRate": "Effective interest rate of <span class=\"effective-rate\">%coloAfterpayInstallmentEffectiveInterestRate%%</span> p.a.",
+        "cartInfo": "The shopping cart of %coloAfterpayBasketAmount% results in a total loan amount of <span class=\"total-amount\">%coloAfterpayInstallmentAmount%</span> when selecting <span class=\"installments-amount\">%coloAfterpayNumberOfInstallments%</span> installments.",
+        "customerInfo200": "Click <a href=\"%coloAfterpayReadMore%\" class=\"read-more\" target=\"_blank\"><span style=\"text-decoration: underline;\">here</span></a> for more Information, the standard informations for consumer loans and exemplary amortisation schedules.",
+        "customerInfo": "Click <a href=\"%coloAfterpayReadMore%\" class=\"read-more\" target=\"_blank\"><span style=\"text-decoration: underline;\">here</span></a> for more Information and exemplary amortisation schedules."
+      }
+    }
+  }
+}

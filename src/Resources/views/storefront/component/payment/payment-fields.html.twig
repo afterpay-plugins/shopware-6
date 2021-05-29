@@ -1,0 +1,66 @@
+{% sw_extends '@Storefront/storefront/component/payment/payment-fields.html.twig' %}
+
+{% block component_payment_method %}
+    {% set isAfterPayPaymentMethodInvoice = payment.formattedHandlerIdentifier is same as('handler_colo_invoicepayment') %}
+    {% set isAfterPayPaymentMethodDirectDebit = payment.formattedHandlerIdentifier is same as('handler_colo_directdebitpayment') %}
+    {% set isAfterPayPaymentMethodInstallment = payment.formattedHandlerIdentifier is same as('handler_colo_installmentpayment') %}
+
+    {% set isAfterPayPaymentMethod = isAfterPayPaymentMethodInvoice or isAfterPayPaymentMethodDirectDebit or isAfterPayPaymentMethodInstallment %}
+
+    {% if isAfterPayPaymentMethod %}
+    <div class="afterpay-payment-method" data-afterpay-payment="true">
+    {% endif %}
+        {{ parent() }}
+    {% if isAfterPayPaymentMethod %}
+    </div>
+    {% endif %}
+{% endblock %}
+
+{% block component_payment_method_image %}
+    {% if not isAfterPayPaymentMethod %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block component_payment_method_description %}
+    {% if not isAfterPayPaymentMethod %}
+        {{ parent() }}
+    {% else %}
+        <div class="payment-method-description">
+            {% block component_afterpay_payment_method_image %}
+                <div class="payment-provider-logo">
+                    <div>
+                        {% if payment.media %}
+                            {% sw_thumbnails 'payment-method-image-thumbnails' with {
+                                media: payment.media,
+                                sizes: {
+                                    'default': '100px'
+                                },
+                                attributes: {
+                                    'class': 'payment-method-image',
+                                    'alt': (payment.media.translated.alt ?: payment.translated.name),
+                                    'title': (payment.media.translated.title ?: payment.translated.name)
+                                }
+                            } %}
+                        {% endif %}
+                    </div>
+                </div>
+            {% endblock %}
+            {% block component_afterpay_payment_method_description %}
+                <strong>{{ payment.translated.name }}</strong>
+                {% if payment.translated.description %}
+                    <p>{{ payment.translated.description|raw }}</p>
+                {% endif %}
+            {% endblock %}
+            {% block component_afterpay_payment_method_additional_fields %}
+                <div class="payment-method-additional-fields">
+                    {% if isAfterPayPaymentMethodDirectDebit %}
+                        {% sw_include '@Storefront/storefront/component/afterpay/payment/direct-debit-fields.html.twig' %}
+                    {% elseif isAfterPayPaymentMethodInstallment %}
+                        {% sw_include '@Storefront/storefront/component/afterpay/payment/installment-fields.html.twig' %}
+                    {% endif %}
+                </div>
+            {% endblock %}
+        </div>
+    {% endif %}
+{% endblock %}

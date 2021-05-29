@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/System/SystemConfig/Schema/config.xsd">
+
+    <card>
+        <title>Basic Configuration</title>
+        <title lang="de-DE">Grundeinstellungen</title>
+
+        <input-field type="single-select">
+            <name>mode</name>
+            <required>true</required>
+            <copyable>false</copyable>
+            <label>Mode</label>
+            <label lang="de-DE">Modus</label>
+            <options>
+                <option>
+                    <id>public_sandbox</id>
+                    <name>Public Sandbox</name>
+                    <name lang="de-DE">Public Sandbox</name>
+                </option>
+                <option>
+                    <id>partner_test</id>
+                    <name>Partner Test</name>
+                    <name lang="de-DE">Partner Test</name>
+                </option>
+                <option>
+                    <id>prod</id>
+                    <name>Production</name>
+                    <name lang="de-DE">Produktion</name>
+                </option>
+            </options>
+            <defaultValue>public_sandbox</defaultValue>
+        </input-field>
+
+        <input-field type="checkbox">
+            <name>autoCapture</name>
+            <label>Autocapture</label>
+            <label lang="de-DE">Automatisches Capture</label>
+            <defaultValue>true</defaultValue>
+        </input-field>
+
+        <input-field type="multi-select">
+            <name>captureOrderStates</name>
+            <required>true</required>
+            <copyable>false</copyable>
+            <label>Capture order statuses</label>
+            <label lang="de-DE">Capture order statuses</label>
+            <options>
+                <option>
+                    <id>open</id>
+                    <name>Open</name>
+                    <name lang="de-DE">Offen</name>
+                </option>
+                <option>
+                    <id>in_progress</id>
+                    <name>In progress</name>
+                    <name lang="de-DE">In Bearbeitung</name>
+                </option>
+                <option>
+                    <id>completed</id>
+                    <name>Completed</name>
+                    <name lang="de-DE">Abgeschlossen</name>
+                </option>
+                <option>
+                    <id>cancelled</id>
+                    <name>Cancelled</name>
+                    <name lang="de-DE">Abgebrochen</name>
+                </option>
+            </options>
+            <defaultValue>open</defaultValue>
+        </input-field>
+
+        <input-field type="multi-select">
+            <name>capturePaymentStates</name>
+            <required>true</required>
+            <copyable>false</copyable>
+            <label>Capture payment statuses</label>
+            <label lang="de-DE">Capture payment statuses</label>
+            <options>
+                <option>
+                    <id>cancelled</id>
+                    <name>Cancelled</name>
+                    <name lang="de-DE">Abgebrochen</name>
+                </option>
+                <option>
+                    <id>authorized</id>
+                    <name>Authorized</name>
+                    <name lang="de-DE">Autorisiert</name>
+                </option>
+                <option>
+                    <id>chargeback</id>
+                    <name>Chargeback</name>
+                    <name lang="de-DE">Rückbuchung</name>
+                </option>
+                <option>
+                    <id>failed</id>
+                    <name>Failed</name>
+                    <name lang="de-DE">Fehlgeschlagen</name>
+                </option>
+                <option>
+                    <id>in_progress</id>
+                    <name>In Progress</name>
+                    <name lang="de-DE">In Bearbeitung</name>
+                </option>
+                <option>
+                    <id>open</id>
+                    <name>Open</name>
+                    <name lang="de-DE">Offen</name>
+                </option>
+                <option>
+                    <id>paid</id>
+                    <name>Paid</name>
+                    <name lang="de-DE">Bezahlt</name>
+                </option>
+                <option>
+                    <id>paid_partially</id>
+                    <name>Paid (partially)</name>
+                    <name lang="de-DE">Teilweise bezahlt</name>
+                </option>
+                <option>
+                    <id>refunded</id>
+                    <name>Refunded</name>
+                    <name lang="de-DE">Erstattet</name>
+                </option>
+                <option>
+                    <id>refunded_partially</id>
+                    <name>Refunded (partially)</name>
+                    <name lang="de-DE">Teilweise erstattet</name>
+                </option>
+                <option>
+                    <id>reminded</id>
+                    <name>Reminded</name>
+                    <name lang="de-DE">Erinnert</name>
+                </option>
+            </options>
+            <defaultValue>open</defaultValue>
+        </input-field>
+
+        <input-field type="multi-select">
+            <name>captureDeliveryStates</name>
+            <required>true</required>
+            <copyable>false</copyable>
+            <label>Capture delivery statuses</label>
+            <label lang="de-DE">Capture delivery statuses</label>
+            <options>
+                <option>
+                    <id>cancelled</id>
+                    <name>Cancelled</name>
+                    <name lang="de-DE">Abgebrochen</name>
+                </option>
+                <option>
+                    <id>open</id>
+                    <name>Open</name>
+                    <name lang="de-DE">Offen</name>
+                </option>
+                <option>
+                    <id>returned</id>
+                    <name>Returned</name>
+                    <name lang="de-DE">Retour</name>
+                </option>
+                <option>
+                    <id>returned_partially</id>
+                    <name>Returned (partially)</name>
+                    <name lang="de-DE">Teilretour</name>
+                </option>
+                <option>
+                    <id>shipped</id>
+                    <name>Shipped</name>
+                    <name lang="de-DE">Versandt</name>
+                </option>
+                <option>
+                    <id>shipped_partially</id>
+                    <name>Shipped (partially)</name>
+                    <name lang="de-DE">Teilweise versandt</name>
+                </option>
+            </options>
+            <defaultValue>shipped</defaultValue>
+        </input-field>
+
+        <input-field type="checkbox">
+            <name>showTosCheckbox</name>
+            <label>Show TOS-Check</label>
+            <label lang="de-DE">AGB-Check anzeigen</label>
+            <defaultValue>true</defaultValue>
+        </input-field>
+
+        <input-field type="checkbox">
+            <name>activateProfileTracking</name>
+            <label>Activate profile-tracking</label>
+            <label lang="de-DE">Profile-Tracking aktivieren</label>
+            <defaultValue>false</defaultValue>
+            <helpText>Please only activate after talking to Afterpay.</helpText>
+            <helpText lang="de-DE">Bitte nur in Rücksprache mit Afterpay aktivieren.</helpText>
+        </input-field>
+
+        <input-field type="text">
+            <name>trackingId</name>
+            <label>Tracking Id</label>
+            <label lang="de-DE">Tracking ID</label>
+        </input-field>
+
+        <input-field type="single-select">
+            <name>logType</name>
+            <required>true</required>
+            <copyable>false</copyable>
+            <label>Log</label>
+            <label lang="de-DE">Log</label>
+            <options>
+                <option>
+                    <id>all</id>
+                    <name>All</name>
+                    <name lang="de-DE">Alles</name>
+                </option>
+                <option>
+                    <id>fail</id>
+                    <name>Failure</name>
+                    <name lang="de-DE">Fehler</name>
+                </option>
+                <option>
+                    <id>none</id>
+                    <name>None</name>
+                    <name lang="de-DE">Nichts</name>
+                </option>
+            </options>
+            <defaultValue>all</defaultValue>
+        </input-field>
+    </card>
+
+    <card>
+        <title>API Settings (DE)</title>
+        <title lang="de-DE">API-Einstellungen (DE)</title>
+
+        <component name="sw-text-field">
+            <name>apiKeyDE</name>
+            <label>API key</label>
+            <label lang="de-DE">API key</label>
+        </component>
+
+        <component name="sw-text-field">
+            <name>merchantIdDE</name>
+            <label>Merchant ID</label>
+            <label lang="de-DE">Merchant ID</label>
+        </component>
+    </card>
+
+    <card>
+        <title>API Settings (AT)</title>
+        <title lang="de-DE">API-Einstellungen (AT)</title>
+
+        <component name="sw-text-field">
+            <name>apiKeyAT</name>
+            <label>API key</label>
+            <label lang="de-DE">API key</label>
+        </component>
+
+        <component name="sw-text-field">
+            <name>merchantIdAT</name>
+            <label>Merchant ID</label>
+            <label lang="de-DE">Merchant ID</label>
+        </component>
+    </card>
+
+    <card>
+        <title>API Settings (BE)</title>
+        <title lang="de-DE">API-Einstellungen (BE)</title>
+
+        <component name="sw-text-field">
+            <name>apiKeyBE</name>
+            <label>API key</label>
+            <label lang="de-DE">API key</label>
+        </component>
+
+        <component name="sw-text-field">
+            <name>merchantIdBE</name>
+            <label>Merchant ID</label>
+            <label lang="de-DE">Merchant ID</label>
+        </component>
+    </card>
+
+    <card>
+        <title>API Settings (NL)</title>
+        <title lang="de-DE">API-Einstellungen (NL)</title>
+
+        <component name="sw-text-field">
+            <name>apiKeyNL</name>
+            <label>API key</label>
+            <label lang="de-DE">API key</label>
+        </component>
+
+        <component name="sw-text-field">
+            <name>merchantIdNL</name>
+            <label>Merchant ID</label>
+            <label lang="de-DE">Merchant ID</label>
+        </component>
+    </card>
+</config>
