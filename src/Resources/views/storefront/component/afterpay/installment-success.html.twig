@@ -1,0 +1,72 @@
+{% block afterpay_installment_options %}
+<div class='colo-afterpay--installments'>
+    {% set coloSelectedInstallment = [] %}
+    {% for coloAfterpayInstallment in coloAfterpayInstallments %}
+        {% set isSelectedInstallment = (coloAfterpaySelectedInstallment and coloAfterpaySelectedInstallment == coloAfterpayInstallment.installmentProfileNumber) %}
+        {% if isSelectedInstallment %}
+            {% set coloSelectedInstallment = coloAfterpayInstallment %}
+        {% endif %}
+        <div class='custom-control custom-radio installment--plan{% if loop.first %} first{% endif %}{% if isSelectedInstallment %} active{% endif %}'
+        data-interest-rate='{{ coloAfterpayInstallment.interestRate }}%'
+        data-effective-rate='{{ coloAfterpayInstallment.effectiveInterestRate }}%'
+        data-installments-amount='{{ coloAfterpayInstallment.numberOfInstallments }}'
+        data-total-amount='{{ coloAfterpayInstallment.totalAmount|currency }}'
+        data-read-more='{{ coloAfterpayInstallment.readMore|raw }}'>
+        <input class="custom-control-input" type="radio" id="installment-plan-{{ coloAfterpayInstallment.installmentProfileNumber }}" name="afterpay_installment_plan"
+               value="{{ coloAfterpayInstallment.installmentProfileNumber }}"{% if isSelectedInstallment %} checked='checked'{% endif %} />
+        <label class="custom-control-label" for="installment-plan-{{ coloAfterpayInstallment.installmentProfileNumber }}">
+            <div class="installment--monthly-fee">
+                {{ "afterpay.installments.texts.monthlyFee"|trans({
+                    '%coloAfterpayInstallmentAmount%': coloAfterpayInstallment.installmentAmount|currency
+                })|raw }}
+            </div>
+            <div class="installment--number">
+                {{ "afterpay.installments.texts.numberOfInstallments"|trans({
+                    '%coloAfterpayInstallmentNumberOfInstallments%': coloAfterpayInstallment.numberOfInstallments
+                })|raw }}
+            </div>
+            <div class="installment--selected">
+                <i class="icon--check"></i>
+            </div>
+        </label>
+    </div>
+    {% endfor %}
+
+    {% block afterpay_installment_info %}
+        <div class="installment--information{% if not coloSelectedInstallment %} d-none{% endif %}">
+            {% block afterpay_installment_help_text %}
+                <div class="installment-information--help-text">
+                    {{ "afterpay.installments.texts.helpText"|trans({
+                        '%coloAfterpayBasketAmount%': coloAfterpayBasketAmount|currency,
+                        '%coloAfterpayInstallmentAmount%': coloSelectedInstallment.totalAmount|currency,
+                        '%coloAfterpayNumberOfInstallments%': coloSelectedInstallment.numberOfInstallments,
+                        '%coloAfterpayInstallmentInterestRate%': coloSelectedInstallment.interestRate,
+                        '%coloAfterpayInstallmentEffectiveInterestRate%': coloSelectedInstallment.effectiveInterestRate,
+                        '%coloAfterpayMerchantPaymentMethod%': coloAfterpayMerchantPaymentMethod,
+                        '%coloAfterpayLanguageCode%': coloAfterpayLanguageCode,
+                        '%coloAfterpayMerchantID%': coloAfterpayMerchantID
+                    })|raw }}
+                </div>
+            {% endblock %}
+            {% block afterpay_installment_example %}
+                <div class="installment-information--example">
+                    {{ "afterpay.installments.texts.example"|trans|raw }}
+                </div>
+            {% endblock %}
+            {% block afterpay_installment_links %}
+                <div class="installment-information--links">
+                    {% if coloAfterpayBasketAmount >= 200 and coloSelectedInstallment.interestRate > 0 %}
+                        {{ "afterpay.installments.texts.customerInfo200"|trans({
+                            '%coloAfterpayReadMore%': coloSelectedInstallment.readMore
+                        })|raw }}
+                    {% else %}
+                        {{ "afterpay.installments.texts.customerInfo"|trans({
+                            '%coloAfterpayReadMore%': coloSelectedInstallment.readMore
+                        })|raw }}
+                    {% endif %}
+                </div>
+            {% endblock %}
+        </div>
+    {% endblock %}
+</div>
+{% endblock %}

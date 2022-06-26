@@ -1,0 +1,18 @@
+{% block component_afterpay_payment_method_fields_phone %}
+    <div class="form-row">
+        {% if customer.get('activeBillingAddress') %}
+            {% set phoneNumber = customer.get('activeBillingAddress').get('phoneNumber') %}
+        {% endif %}
+
+        <label class="form-label" for="afterpayPhoneNumber">
+            {{ "address.phoneNumberLabel"|trans|sw_sanitize }}{{ "general.required"|trans|sw_sanitize }}
+        </label>
+
+        <input type="text"
+               class="form-control is-required"
+               id="afterpayPhoneNumber"
+               placeholder="{{ "address.phoneNumberPlaceholder"|trans|striptags }}"
+               name="phoneNumber"
+               value="{{ phoneNumber }}">
+    </div>
+{% endblock %}

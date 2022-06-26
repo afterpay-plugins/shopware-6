@@ -1,9 +1,11 @@
 // Import all necessary Storefront plugins and scss files
-import AfterPay from './js/afterpay';
+import AfterPayPaymentSelection from './js/afterpay-payment-selection';
+import AfterPayCheckoutConfirm from './js/afterpay-checkout-confirm';
 
 // Register them via the existing PluginManager
 const PluginManager = window.PluginManager;
-PluginManager.register('AfterPay', AfterPay, '[data-afterpay-payment]');
+PluginManager.register('AfterPayPaymentSelection', AfterPayPaymentSelection, '[data-afterpay-payment]');
+PluginManager.register('AfterPayCheckoutConfirm', AfterPayCheckoutConfirm, '.is-ctl-checkout.is-act-confirmpage');
 
 // Necessary for the webpack hot module reloading server
 if (module.hot) {

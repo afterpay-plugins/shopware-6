@@ -1,0 +1,28 @@
+{% sw_extends '@Storefront/storefront/page/checkout/finish/finish-details.html.twig' %}
+
+{% block page_checkout_finish_order_payment_method %}
+    {% set isAfterPayPaymentMethodInvoice = context.paymentMethod.formattedHandlerIdentifier is same as('handler_colo_invoicepayment') %}
+    {% set isAfterPayPaymentMethodDirectDebit = context.paymentMethod.formattedHandlerIdentifier is same as('handler_colo_directdebitpayment') %}
+    {% set isAfterPayPaymentMethodInstallment = context.paymentMethod.formattedHandlerIdentifier is same as('handler_colo_installmentpayment') %}
+    {% set isAfterPayPaymentMethod = isAfterPayPaymentMethodInvoice or isAfterPayPaymentMethodDirectDebit or isAfterPayPaymentMethodInstallment %}
+    <p>
+        <strong>{{ "checkout.finishInfoPayment"|trans|sw_sanitize }}</strong>
+        {{ page.order.transactions.last.paymentMethod.translated.name }}
+        {% if isAfterPayPaymentMethod and page.order.transactions.last.paymentMethod.media%}
+            {% sw_thumbnails 'confirm-payment-current-image-thumbnails' with {
+                media: page.order.transactions.last.paymentMethod.media,
+                sizes: {
+                    'default': '100px'
+                },
+                attributes: {
+                    'class': 'payment-method-image',
+                    'alt': (page.order.transactions.last.paymentMethod.media.translated.alt ?: page.order.transactions.last.paymentMethod.translated.name),
+                    'title': (page.order.transactions.last.paymentMethod.media.translated.title ?: page.order.transactions.last.paymentMethod.translated.name)
+                }
+            } %}
+        {% endif %}
+    </p>
+    <p>
+        {{ "afterpay.checkout.finishAfterPayText"|trans|raw }}
+    </p>
+{% endblock %}

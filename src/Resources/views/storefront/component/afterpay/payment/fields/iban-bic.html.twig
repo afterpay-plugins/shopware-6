@@ -1,0 +1,19 @@
+{% block component_afterpay_payment_method_fields_iban_bic %}
+    <div class="form-row">
+        {% set maskedIban = '' %}
+        {% set iban = context.customer.customFields['afterpay_iban'] %}
+        {% if iban %}
+            {% if iban|length > 10 %}
+                {% set maskedIban = iban[:10] ~ '********' ~ iban[18:] %}
+            {% else %}
+                {% set maskedIban = iban %}
+            {% endif %}
+        {% endif %}
+        <input type="text" class="form-control{% if not maskedIban %} is-required{% endif %}" name="afterpay_iban"
+               value=""
+               placeholder="{% if maskedIban %}{{ maskedIban }}{% else %}{{ ('afterpay.checkout.paymentFields.' ~ afterpayPaymentMethod ~ '.iban')|trans }}{% endif %}"/>
+        {% if maskedIban %}
+            <input type="hidden" value="{{ maskedIban }}" name="afterpay_iban_masked" />
+        {% endif %}
+    </div>
+{% endblock %}

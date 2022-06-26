@@ -1,0 +1,74 @@
+{% block component_afterpay_payment_method_fields_birthday %}
+    <div class="form-row">
+        {% if customer.birthday %}
+            {% set birthday = customer.birthday|date('d') %}
+            {% set birthmonth = customer.birthday|date('m') %}
+            {% set birthyear = customer.birthday|date('Y') %}
+        {% endif %}
+
+        <div class="col-md-12 pl-0">
+            <label class="form-label" for="personalBirthday">
+                {{ "account.personalBirthdayLabel"|trans|sw_sanitize }}{{ "general.required"|trans|sw_sanitize }}
+            </label>
+        </div>
+
+        <div class="form-group col-4 col-md-2 pl-0">
+            <select id="personalBirthday"
+                    name="birthdayDay"
+                    class="custom-select birthday-field is-required">
+                {% if not birthday %}
+                    <option selected="selected"
+                            value="">
+                        {{ "account.personalBirthdaySelectDay"|trans|sw_sanitize }}
+                    </option>
+                {% endif %}
+                {% for day in range(1, 31) %}
+                    <option value="{{ day }}"
+                            {% if day == birthday %} selected="selected"{% endif %}>
+                        {{ day }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group col-4 col-md-2">
+            <select name="birthdayMonth"
+                    class="custom-select birthday-field is-required">
+                {% if not birthmonth %}
+                    <option selected="selected"
+                            value="">
+                        {{ "account.personalBirthdaySelectMonth"|trans|sw_sanitize }}
+                    </option>
+                {% endif %}
+                {% for month in range(1, 12) %}
+                    <option value="{{ month }}"
+                            {% if month == birthmonth %} selected="selected"{% endif %}>
+                        {{ month }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group col-4 col-md-2">
+            {% set currentYear = "now"|date('Y') %}
+            {% set endYear = currentYear - 18 %}
+            {% set startYear = currentYear - 120 %}
+
+            <select name="birthdayYear"
+                    class="custom-select birthday-field is-required">
+                {% if not birthyear %}
+                    <option selected="selected"
+                            value="">
+                        {{ "account.personalBirthdaySelectYear"|trans|sw_sanitize }}
+                    </option>
+                {% endif %}
+                {% for year in range(endYear, startYear) %}
+                    <option value="{{ year }}"
+                            {% if year == birthyear %} selected="selected"{% endif %}>
+                        {{ year }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+{% endblock %}

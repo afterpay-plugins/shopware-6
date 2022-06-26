@@ -9,31 +9,33 @@
       "InstallmentNotValid": "Selected installment not valid"
     },
     "checkout": {
-      "confirmAfterPayTerms": "I have read the <a href=\"https://documents.myafterpay.com/consumer-terms-conditions/%coloAfterpayLanguageCode%/%coloAfterpayMerchantID%/%coloAfterpayMerchantPaymentMethod%\" title=\"Terms & Conditions\" target=\"_blank\">Terms & Conditions</a> and the <a href=\"https://documents.myafterpay.com/privacy-statement/%coloAfterpayLanguageCode%/%coloAfterpayMerchantID%\" title=\"Privacy Policy\" target=\"_blank\">Privacy Policy</a> of AfterPay and do accept them.",
+      "finishAfterPayText": "Visit <a href=\"https://www.myafterpay.com/de-de\" target=\"_blank\" title=\"MyAfterPay\"><b>MyAfterPay</b></a> or download the <a href=\"https://www.myafterpay.com/de-de/feature/app\" target=\"_blank\" title=\"AfterPay App\"><b>AfterPay App</b></a> to keep track of all your invoices.",
+      "confirmAfterPayTerms": "I agree to the use of my data for the purpose of fraud prevention according to clause 4.1.2 of the <a href=\"https://documents.myafterpay.com/privacy-statement/%coloAfterpayLanguageCode%/%coloAfterpayMerchantID%#412\" title=\"privacy policy\" target=\"_blank\">privacy policy</a>.",
+      "confirmAfterPayTermsNL": "I agree to the use of my data for the purpose of fraud prevention according to clause 4.1.2 of the <a href=\"https://www.afterpay.nl/en/about/about-afterpay/privacy-statement-afterpay-english\" title=\"privacy policy\" target=\"_blank\">privacy policy</a>.",
+      "afterPayTermsAndConditions": "The <a href=\"https://documents.myafterpay.com/consumer-terms-conditions/%coloAfterpayLanguageCode%/%coloAfterpayMerchantID%/%coloAfterpayMerchantPaymentMethod%\" title=\"AfterPay Terms & Conditions\" target=\"_blank\">AfterPay Terms & Conditions</a> apply.",
+      "confirmInstallmentTotalInterestAmount": "<b>Entire interest of chosen installment</b>",
       "paymentFields": {
         "directdebit": {
           "iban": "IBAN*",
-          "bic": "BIC*",
           "requiredInfo": "* hierbei handelt es sich um ein Pflichtfeld"
         },
         "installment": {
           "iban": "IBAN*",
-          "bic": "BIC*",
           "requiredInfo": "* hierbei handelt es sich um ein Pflichtfeld"
         }
+      },
+      "messages":  {
+        "paymentMethodChanged": "Payment method has been changed."
       }
     },
     "installments": {
       "texts": {
-        "month": "Month",
-        "in": "in",
-        "installments": "installments",
-        "uspline": "Same installments every month - no surprises",
-        "interestRate": "Fixed interest rate of <span class=\"interest-rate\">%coloAfterpayInstallmentInterestRate%%</span> p.a.",
-        "effectiveInterestRate": "Effective interest rate of <span class=\"effective-rate\">%coloAfterpayInstallmentEffectiveInterestRate%%</span> p.a.",
-        "cartInfo": "The shopping cart of %coloAfterpayBasketAmount% results in a total loan amount of <span class=\"total-amount\">%coloAfterpayInstallmentAmount%</span> when selecting <span class=\"installments-amount\">%coloAfterpayNumberOfInstallments%</span> installments.",
-        "customerInfo200": "Click <a href=\"%coloAfterpayReadMore%\" class=\"read-more\" target=\"_blank\"><span style=\"text-decoration: underline;\">here</span></a> for more Information, the standard informations for consumer loans and exemplary amortisation schedules.",
-        "customerInfo": "Click <a href=\"%coloAfterpayReadMore%\" class=\"read-more\" target=\"_blank\"><span style=\"text-decoration: underline;\">here</span></a> for more Information and exemplary amortisation schedules."
+        "monthlyFee": "%coloAfterpayInstallmentAmount% / Month *",
+        "numberOfInstallments": "in %coloAfterpayInstallmentNumberOfInstallments% installments",
+        "helpText": "<b>*The shopping cart of %coloAfterpayBasketAmount% results in a total loan amount of <span class=\"total-amount\">%coloAfterpayInstallmentAmount%</span> when selecting <span class=\"installments-amount\">%coloAfterpayNumberOfInstallments%</span> installments.<br/>Debit interest is <span class=\"interest-rate\">%coloAfterpayInstallmentInterestRate%%</span> and effective interest rate is <span class=\"effective-rate\">%coloAfterpayInstallmentEffectiveInterestRate%%</span>.</b><br/><br/>The Goods remain the property of the shop until the outstanding claim has been paid in full (retention of title). You do not have to provide Insurance. The rates are collected by direct debit. The option of paying the total amount displayed in the Checkout-Summary (basket value plus shipping) with the here chosen installments (and plus the shown interest above) depends on the condition if a subsequent installment agreement will be agreed upon (thereto more in the <a href=\"https://documents.myafterpay.com/consumer-terms-conditions/%coloAfterpayLanguageCode%/%coloAfterpayMerchantID%/%coloAfterpayMerchantPaymentMethod%\" title=\"AfterPay T&C\" target=\"_blank\">AfterPay T&C</a>). The total amount has to be paid in full and no interest will accrue if a subsequent installment agreement will not be agreed on.",
+        "example": "<i>Example:<br/>For a purchase of EUR 200.00, a borrowing rate of 14.95% and a repayment plan of 12 steady monthly rates, the effective annual interest rate is 16.02%. Thefore, each monthly repayment rate equals EUR 18.05 and the total costs are EUR 216.60. For the same purchase volume but a repayment plan of 6 steady monthly rates instead, the effective annual interest rate is 15.91%. Each monthly repayment rate then equals EUR 34.80 and the total costs are EUR 208.80.</i>",
+        "customerInfo200": "<b>Click <a href=\"%coloAfterpayReadMore%\" class=\"read-more\" target=\"_blank\"><span style=\"text-decoration: underline;\">here</span></a> for more Information, the standard informations for consumer loans and exemplary amortisation schedules.</b>",
+        "customerInfo": "<b>Click <a href=\"%coloAfterpayReadMore%\" class=\"read-more\" target=\"_blank\"><span style=\"text-decoration: underline;\">here</span></a> for more Information and exemplary amortisation schedules.</b>"
       }
     }
   }

@@ -9,31 +9,33 @@
       "InstallmentNotValid": "Selected installment not valid"
     },
     "checkout": {
-      "confirmAfterPayTerms": "Ich habe die <a href=\"https://documents.myafterpay.com/consumer-terms-conditions/%coloAfterpayLanguageCode%/%coloAfterpayMerchantID%/%coloAfterpayMerchantPaymentMethod%\" title=\"Allgemeinen Geschäftsbedingungen\" target=\"_blank\">Allgemeinen Geschäftsbedingungen</a> und die <a href=\"https://documents.myafterpay.com/privacy-statement/%coloAfterpayLanguageCode%/%coloAfterpayMerchantID%\" title=\"Datenschutzerklärung\" target=\"_blank\">Datenschutzerklärung</a> von AfterPay gelesen und akzeptiere diese.",
+      "finishAfterPayText": "Besuchen Sie <a href=\"https://www.myafterpay.com/de-de\" target=\"_blank\" title=\"MyAfterPay\"><b>MyAfterPay</b></a> oder laden Sie die <a href=\"https://www.myafterpay.com/de-de/feature/app\" target=\"_blank\" title=\"AfterPay App\"><b>AfterPay App</b></a> herunter, um Überblick über alle Ihre Rechnungen zu erhalten.",
+      "confirmAfterPayTerms": "Ich stimme zu, dass meine Daten zum Zweck der Betrugsprävention gemäß Ziffer 4.1.2 der <a href=\"https://documents.myafterpay.com/privacy-statement/%coloAfterpayLanguageCode%/%coloAfterpayMerchantID%#412\" title=\"Datenschutzerklärung\" target=\"_blank\">Datenschutzerklärung</a> verarbeitet werden.",
+      "confirmAfterPayTermsNL": "Ich stimme zu, dass meine Daten zum Zweck der Betrugsprävention gemäß Ziffer 4.1.2 der <a href=\"https://www.afterpay.nl/nl/algemeen/over-afterpay/privacy-statement\" title=\"Datenschutzerklärung\" target=\"_blank\">Datenschutzerklärung</a> verarbeitet werden.",
+      "afterPayTermsAndConditions": "Es gelten die <a href=\"https://documents.myafterpay.com/consumer-terms-conditions/%coloAfterpayLanguageCode%/%coloAfterpayMerchantID%/%coloAfterpayMerchantPaymentMethod%\" title=\"Allgemeinen Geschäftsbedingungen von AfterPay\" target=\"_blank\">Allgemeinen Geschäftsbedingungen von AfterPay</a>.<br/>Die Datenschutzerklärung von AfterPay befindet sich <a href=\"#\" target=\"_blank\">hier</a>.",
+      "confirmInstallmentTotalInterestAmount": "<b>Gesamtzinsen der gewählte Ratenzahlung</b>",
       "paymentFields": {
         "directdebit": {
           "iban": "IBAN*",
-          "bic": "BIC*",
           "requiredInfo": "* hierbei handelt es sich um ein Pflichtfeld"
         },
         "installment": {
           "iban": "IBAN*",
-          "bic": "BIC*",
           "requiredInfo": "* hierbei handelt es sich um ein Pflichtfeld"
         }
+      },
+      "messages":  {
+        "paymentMethodChanged": "Zahlungsart wurde erfolgreich geändert."
       }
     },
     "installments": {
       "texts": {
-        "month": "Month",
-        "in": "in",
-        "installments": "installments",
-        "uspline": "Same installments every month - no surprises",
-        "interestRate": "Fixed interest rate of <span class=\"interest-rate\">%coloAfterpayInstallmentInterestRate%%</span> p.a.",
-        "effectiveInterestRate": "Effective interest rate of <span class=\"effective-rate\">%coloAfterpayInstallmentEffectiveInterestRate%%</span> p.a.",
-        "cartInfo": "The shopping cart of %coloAfterpayBasketAmount% results in a total loan amount of <span class=\"total-amount\">%coloAfterpayInstallmentAmount%</span> when selecting <span class=\"installments-amount\">%coloAfterpayNumberOfInstallments%</span> installments.",
-        "customerInfo200": "Click <a href=\"%coloAfterpayReadMore%\" class=\"read-more\" target=\"_blank\"><span style=\"text-decoration: underline;\">here</span></a> for more Information, the standard informations for consumer loans and exemplary amortisation schedules.",
-        "customerInfo": "Click <a href=\"%coloAfterpayReadMore%\" class=\"read-more\" target=\"_blank\"><span style=\"text-decoration: underline;\">here</span></a> for more Information and exemplary amortisation schedules."
+        "monthlyFee": "%coloAfterpayInstallmentAmount% / Monat *",
+        "numberOfInstallments": "in %coloAfterpayInstallmentNumberOfInstallments% Raten",
+        "helpText": "<b>*Bei einem Warenkorb in Höhe von %coloAfterpayBasketAmount% und <span class=\"installments-amount\">%coloAfterpayNumberOfInstallments%</span> gleichbleibenden Raten beläuft sich der Gesamtbetrag auf <span class=\"total-amount\">%coloAfterpayInstallmentAmount%</span>. Soll-Zinssatz ist <span class=\"interest-rate\">%coloAfterpayInstallmentInterestRate%%</span> und Effektivzinssatz ist <span class=\"effective-rate\">%coloAfterpayInstallmentEffectiveInterestRate%%</span>.</b><br/><br/>Die Ware bleibt im Eigentum des Verkäufers bis der ausstehende Gesamtbetrag voll gezahlt wurde (Eigentumsvorbehalt). Es sind keine Versicherungen zu stellen. Die erste Monatsrate ist einen Monat nach Vereinbarung der Ratenzahlung fällig. Die darauf folgenden Raten sind in Abständen von jeweils einem Monat fällig. Die Raten werden im Lastschriftverfahren eingezogen. Die Option der Zahlung der in der Zusammenfassung im Checkout angezeigten Gesamtsumme (Warenkorbwert zzgl. Versandkosten) in Form der hier ausgewählten Raten (und zzgl. der angezeigten Zinskosten) hängt vom Zustandekommen des nachträglichen Teilzahlungsgeschäfts ab (hierzu näher die <a href=\"https://documents.myafterpay.com/consumer-terms-conditions/%coloAfterpayLanguageCode%/%coloAfterpayMerchantID%/%coloAfterpayMerchantPaymentMethod%\" title=\"AfterPay AGB\" target=\"_blank\">AfterPay AGB</a>). Sollte das nachträgliche Teilzahlungsgeschäft nicht erfolgen, so ist die Gesamtsumme auf einmal zu zahlen und die angezeigten Zinskosten entfallen.",
+        "example": "<i>Beispiel:<br/>Bei einen Warenkorb im Wert von EUR 200,00, einem Soll-Zinssatz in Höhe von 14,95% und einer Rückzahlung des Gesamtbetrags in 12 gleichbleibenden monatlichen Raten ergibt sich ein effektiver Jahreszins in Höhe von 16,02%. Die monatlich zu zahlenden Raten betragen dann jeweils EUR 18,05, sodass sich der Gesamtbetrag auf EUR 216,60 beläuft. Bei gleichem Warenkorbwert und Soll-Zinssatz, jedoch bei Rückzahlung in 6 gleichbleibenden monatlichen Raten, ergibt sich ein effektiver Jahreszins von 15,91%. Die monatlich zu zahlenden Raten betragen dann jeweils EUR 34,80 und der Gesamtbetrag beläuft sich auf EUR 208,80.</i>",
+        "customerInfo200": "<b><a href=\"%coloAfterpayReadMore%\" class=\"read-more\" target=\"_blank\"><span style=\"text-decoration: underline;\">Hier</span></a> klicken für weitere Informationen</b>",
+        "customerInfo": "<b><a href=\"%coloAfterpayReadMore%\" class=\"read-more\" target=\"_blank\"><span style=\"text-decoration: underline;\">Hier</span></a> klicken für weitere Informationen</b>"
       }
     }
   }

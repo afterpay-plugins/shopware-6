@@ -1,0 +1,21 @@
+{% block component_afterpay_payment_method_direct_debit %}
+    <div class="payment-method-direct-debit-fields" data-afterpay-payment-form="true" data-save-url="{{ path('frontend.afterpay.save-payment-details') }}">
+        <input type="hidden" name="required_fields" value="afterpay_iban{% if showPhoneNumber %},phoneNumber{% endif %}{% if showBirthday %},birthdayDay,birthdayMonth,birthdayYear{% endif %}" />
+        {% sw_include '@Storefront/storefront/component/afterpay/payment/fields/iban-bic.html.twig' with
+            {
+                'afterpayPaymentMethod': 'directdebit'
+            } %}
+
+        {% if showBirthday %}
+            {% sw_include '@Storefront/storefront/component/afterpay/payment/fields/birthday.html.twig' %}
+        {% endif %}
+
+        {% if showPhoneNumber %}
+            {% sw_include '@Storefront/storefront/component/afterpay/payment/fields/phone.html.twig' %}
+        {% endif %}
+
+        <div class="form-row">
+            <span>{{ ('afterpay.checkout.paymentFields.directdebit.requiredInfo')|trans }}</span>
+        </div>
+    </div>
+{% endblock %}

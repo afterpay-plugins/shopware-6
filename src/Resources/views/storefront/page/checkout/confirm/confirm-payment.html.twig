@@ -1,47 +1,125 @@
 {% sw_extends '@Storefront/storefront/page/checkout/confirm/confirm-payment.html.twig' %}
 
-{% block page_checkout_confirm_payment_current_text %}
-    {{ parent() }}
-
+{% block page_checkout_confirm_payment_current_image %}
+    {% set isAfterPayPaymentMethodInvoice = context.paymentMethod.formattedHandlerIdentifier is same as('handler_colo_invoicepayment') %}
     {% set isAfterPayPaymentMethodDirectDebit = context.paymentMethod.formattedHandlerIdentifier is same as('handler_colo_directdebitpayment') %}
     {% set isAfterPayPaymentMethodInstallment = context.paymentMethod.formattedHandlerIdentifier is same as('handler_colo_installmentpayment') %}
 
-    {% if isAfterPayPaymentMethodDirectDebit or isAfterPayPaymentMethodInstallment %}
-        {% if isAfterPayPaymentMethodDirectDebit %}
-            {% set afterpayPaymentMethod = 'directdebit' %}
-        {% else %}
-            {% set afterpayPaymentMethod = 'installment' %}
-        {% endif %}
+    {% set isAfterPayPaymentMethod = isAfterPayPaymentMethodInvoice or isAfterPayPaymentMethodDirectDebit or isAfterPayPaymentMethodInstallment %}
 
-        {% set maskedIban = '' %}
-        {% set iban = context.customer.customFields['afterpay_' ~ afterpayPaymentMethod ~ '_iban'] %}
-        {% set bic = context.customer.customFields['afterpay_' ~ afterpayPaymentMethod ~ '_bic'] %}
-        {% if iban %}
-            {% if iban|length > 10 %}
-                {% set maskedIban = iban[:10] ~ '********' ~ iban[18:] %}
+    {% if not isAfterPayPaymentMethod %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block page_checkout_confirm_payment_current_text %}
+    {% set isAfterPayPaymentMethodInvoice = context.paymentMethod.formattedHandlerIdentifier is same as('handler_colo_invoicepayment') %}
+    {% set isAfterPayPaymentMethodDirectDebit = context.paymentMethod.formattedHandlerIdentifier is same as('handler_colo_directdebitpayment') %}
+    {% set isAfterPayPaymentMethodInstallment = context.paymentMethod.formattedHandlerIdentifier is same as('handler_colo_installmentpayment') %}
+
+    {% set isAfterPayPaymentMethod = isAfterPayPaymentMethodInvoice or isAfterPayPaymentMethodDirectDebit or isAfterPayPaymentMethodInstallment %}
+
+    {% if isAfterPayPaymentMethod %}
+        <strong>
+            {{ "checkout.confirmCurrentPaymentShipping"|trans|sw_sanitize }}
+
+            {% block page_checkout_confirm_payment_invalid_tooltip %}{% endblock %}
+
+            {% if paymentMethodInvalid %}
+                {{ "checkout.confirmSelectionNone"|trans|sw_sanitize }}
             {% else %}
-                {% set maskedIban = iban %}
+                {{ context.paymentMethod.translated.name }}
             {% endif %}
-        {% endif %}
-        <div class="afterpay-payment-data">
-            <div data-afterpay-payment="true">
-                {% if maskedIban or bic %}
-                    <div class="iban-bic-data">
-                        {% if maskedIban %}
-                            <strong>IBAN:</strong> {{ maskedIban }}<br/>
-                        {% endif %}
-                        {% if bic %}
-                            <strong>BIC:</strong> {{ bic }}
-                        {% endif %}
-                    </div>
-                {% endif %}
+        </strong>
 
-{#                {% if isAfterPayPaymentMethodInstallment %}#}
-{#                    <div class="payment-method-installment-fields" data-afterpay-payment-form="true" data-save-url="{{ path('frontend.afterpay.save-bank-details') }}">#}
-{#                        <div class="installments-container" data-installments="true" data-get-url="{{ path('frontend.afterpay.get-installments') }}"></div>#}
-{#                    </div>#}
-{#                {% endif %}#}
+        {% if context.paymentMethod.media %}
+            {% sw_thumbnails 'confirm-payment-current-image-thumbnails' with {
+                media: context.paymentMethod.media,
+                sizes: {
+                    'default': '100px'
+                },
+                attributes: {
+                    'class': 'payment-method-image',
+                    'alt': (context.paymentMethod.media.translated.alt ?: context.paymentMethod.translated.name),
+                    'title': (context.paymentMethod.media.translated.title ?: context.paymentMethod.translated.name)
+                }
+            } %}
+        {% endif %}
+
+        {% set afterPayData = page.extensions[constant('Colo\\AfterPay\\Subscribers\\CheckoutSubscriber::AFTERPAY_DATA_EXTENSION_ID')] %}
+
+        <br/>
+        <span>{{ "afterpay.checkout.afterPayTermsAndConditions"|trans({
+                '%coloAfterpayMerchantPaymentMethod%': afterPayData.merchantPaymentMethod,
+                '%coloAfterpayLanguageCode%': afterPayData.languageCode,
+                '%coloAfterpayMerchantID%': afterPayData.merchantId
+            })|raw }}</span>
+        <br/><br/>
+        {% if afterPayData.afterPayActive and afterPayData.merchantId and afterPayData.showTosCheckbox %}
+            <span class="custom-control custom-checkbox">
+                {% block page_checkout_confirm_afterpay_tos_control_checkbox %}
+                    <input type="checkbox"
+                           class="custom-control-input{% if formViolations.getViolations('/afterpay_tos') is not empty %} is-invalid{% endif %}"
+                           id="afterpay_tos"
+                           form="confirmOrderForm"
+                           {% if afterPayData.tosCheckboxRequired %}required="required"{% endif %}
+                           name="afterpay_tos"
+                           data-tracking-url="{{ path('frontend.afterpay.tracking') }}"/>
+                    <script>
+                        document.getElementById('afterpay_tos').checked = false;
+                    </script>
+                {% endblock %}
+
+                {% block page_checkout_confirm_afterpay_tos_control_label %}
+                    <label for="afterpay_tos"
+                           class="custom-control-label">
+                        {% if afterPayData.shippingCountryCode == 'nl' %}
+                            {{ "afterpay.checkout.confirmAfterPayTermsNL"|trans({
+                                '%coloAfterpayMerchantPaymentMethod%': afterPayData.merchantPaymentMethod,
+                                '%coloAfterpayLanguageCode%': afterPayData.languageCode,
+                                '%coloAfterpayMerchantID%': afterPayData.merchantId
+                            })|raw }}
+                        {% else %}
+                            {{ "afterpay.checkout.confirmAfterPayTerms"|trans({
+                                '%coloAfterpayMerchantPaymentMethod%': afterPayData.merchantPaymentMethod,
+                                '%coloAfterpayLanguageCode%': afterPayData.languageCode,
+                                '%coloAfterpayMerchantID%': afterPayData.merchantId
+                            })|raw }}
+                        {% endif %}
+                    </label>
+                {% endblock %}
+            </span>
+        {% endif %}
+
+        {% if isAfterPayPaymentMethodDirectDebit or isAfterPayPaymentMethodInstallment %}
+            {% if isAfterPayPaymentMethodDirectDebit %}
+                {% set afterpayPaymentMethod = 'directdebit' %}
+            {% else %}
+                {% set afterpayPaymentMethod = 'installment' %}
+            {% endif %}
+
+            {% set maskedIban = '' %}
+            {% set iban = context.customer.customFields['afterpay_iban'] %}
+            {% if iban %}
+                {% if iban|length > 10 %}
+                    {% set maskedIban = iban[:10] ~ '********' ~ iban[18:] %}
+                {% else %}
+                    {% set maskedIban = iban %}
+                {% endif %}
+            {% endif %}
+            <div class="afterpay-payment-data">
+                <div data-afterpay-payment="true">
+                    {% if maskedIban %}
+                        <div class="iban-bic-data">
+                            {% if maskedIban %}
+                                <strong>IBAN:</strong> {{ maskedIban }}<br/>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </div>
             </div>
-        </div>
+        {% endif %}
+    {% else %}
+        {{ parent() }}
     {% endif %}
 {% endblock %}

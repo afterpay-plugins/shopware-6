@@ -1,31 +1,27 @@
 {% sw_extends '@Storefront/storefront/page/checkout/confirm/index.html.twig' %}
 
-{% block page_checkout_confirm_tos_control %}
+{% block page_checkout_aside_summary %}
     {{ parent() }}
 
     {% set afterPayData = page.extensions[constant('Colo\\AfterPay\\Subscribers\\CheckoutSubscriber::AFTERPAY_DATA_EXTENSION_ID')] %}
+    {% set isAfterPayPaymentMethodInstallment = context.paymentMethod.formattedHandlerIdentifier is same as('handler_colo_installmentpayment') %}
+    {% block page_checkout_summary_installment_interest %}
+        {% if isAfterPayPaymentMethodInstallment and afterPayData.selectedInstallment %}
+            <div class="checkout-aside-afterpay-total-installment-amount">
+                <dl class="row checkout-aside-summary-list">
+                    {% block page_checkout_summary_installment_interest_label %}
+                        <dt class="col-9 checkout-aside-summary-label">
+                            {{ "afterpay.checkout.confirmInstallmentTotalInterestAmount"|trans|raw }}
+                        </dt>
+                    {% endblock %}
 
-    {% if afterPayData.afterPayActive and afterPayData.merchantId and afterPayData.tosCheckbox %}
-        <div class="custom-control custom-checkbox">
-            {% block page_checkout_confirm_afterpay_tos_control_checkbox %}
-                <input type="checkbox"
-                       class="custom-control-input{% if formViolations.getViolations('/afterpay_tos') is not empty %} is-invalid{% endif %}"
-                       required="required"
-                       id="afterpay_tos"
-                       form="confirmOrderForm"
-                       name="afterpay_tos"/>
-            {% endblock %}
-
-            {% block page_checkout_confirm_afterpay_tos_control_label %}
-                <label for="afterpay_tos"
-                       class="custom-control-label">
-                    {{ "afterpay.checkout.confirmAfterPayTerms"|trans({
-                        '%coloAfterpayMerchantPaymentMethod%': afterPayData.merchantPaymentMethod,
-                        '%coloAfterpayLanguageCode%': afterPayData.languageCode,
-                        '%coloAfterpayMerchantID%': afterPayData.merchantId
-                    })|raw }}
-                </label>
-            {% endblock %}
-        </div>
-    {% endif %}
+                    {% block page_checkout_summary_installment_interest_value %}
+                        <dd class="col-3 checkout-aside-summary-value">
+                            <b>{{ afterPayData.selectedInstallment.totalInterestAmount|currency }}</b>
+                        </dd>
+                    {% endblock %}
+                </dl>
+            </div>
+        {% endif %}
+    {% endblock %}
 {% endblock %}

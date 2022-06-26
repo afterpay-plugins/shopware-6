@@ -27,6 +27,24 @@
   }
 }
 
+.checkout-container {
+  .checkout-aside-afterpay-total-installment-amount {
+    padding: 0 10px;
+
+    .checkout-aside-summary-list {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.confirm-payment-current {
+  .payment-method-image {
+    max-height: 35px;
+    max-width: 100px;
+    display: inline-block;
+  }
+}
+
 .colo-afterpay--installments {
   margin-top: 20px;
 
@@ -103,17 +121,11 @@
   .installment--information {
     margin-top: 20px;
     position: relative;
-    ul {
-      margin-left: 0;
-      list-style: none;
-      li:before {
-        content: '\2713\0020';
-        color: green;
-        font-weight: bold;
-        position: absolute;
-        left: 10px;
-      }
+
+    .installment-information--example {
+      margin: 10px 0;
     }
+
     .installment-information--links {
       margin-top: 10px;
     }

@@ -53,11 +53,36 @@
                 {% endif %}
             {% endblock %}
             {% block component_afterpay_payment_method_additional_fields %}
+                {% set showPhoneNumber = false %}
+                {% set showBirthday = false %}
+                {% if context.customer.get('activeBillingAddress') %}
+                    {% set countryIso = context.customer.get('activeBillingAddress').country.iso %}
+                    {% if shopware.config.AfterPay.config['requireBirthdayField' ~ countryIso] is defined %}
+                        {% set showBirthday = shopware.config.AfterPay.config['requireBirthdayField' ~ countryIso] %}
+                    {% endif %}
+                    {% if countryIso == 'BE' or countryIso == 'NL' %}
+                        {% set showPhoneNumber = true %}
+                    {% endif %}
+                {% endif %}
                 <div class="payment-method-additional-fields">
-                    {% if isAfterPayPaymentMethodDirectDebit %}
-                        {% sw_include '@Storefront/storefront/component/afterpay/payment/direct-debit-fields.html.twig' %}
+                    {% if isAfterPayPaymentMethodInvoice %}
+                        {% sw_include '@Storefront/storefront/component/afterpay/payment/invoice.html.twig' with {
+                            customer: context.customer,
+                            showPhoneNumber: showPhoneNumber,
+                            showBirthday: showBirthday
+                        } %}
+                    {% elseif isAfterPayPaymentMethodDirectDebit %}
+                        {% sw_include '@Storefront/storefront/component/afterpay/payment/direct-debit.html.twig' with {
+                            customer: context.customer,
+                            showPhoneNumber: showPhoneNumber,
+                            showBirthday: showBirthday
+                        } %}
                     {% elseif isAfterPayPaymentMethodInstallment %}
-                        {% sw_include '@Storefront/storefront/component/afterpay/payment/installment-fields.html.twig' %}
+                        {% sw_include '@Storefront/storefront/component/afterpay/payment/installment.html.twig' with {
+                            customer: context.customer,
+                            showPhoneNumber: showPhoneNumber,
+                            showBirthday: showBirthday
+                        } %}
                     {% endif %}
                 </div>
             {% endblock %}
